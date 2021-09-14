@@ -9,7 +9,7 @@ class GalleryViewModel(application: Application) : AndroidViewModel(application)
     val liveData: MutableLiveData<List<String>> = MutableLiveData()
     var listOfPicture: ArrayList<String> = ArrayList()
 
-    fun getPictureList(): ArrayList<String> {
+    fun getPictureList() {
         listOfPicture = arrayListOf(
             (getApplication<Application>().resources.getString(R.string.picture1)),
             (getApplication<Application>().resources.getString(R.string.picture2)),
@@ -18,7 +18,6 @@ class GalleryViewModel(application: Application) : AndroidViewModel(application)
             (getApplication<Application>().resources.getString(R.string.picture5))
         )
         liveData.value = listOfPicture
-        return listOfPicture
     }
 
     fun setImage(url: String) {

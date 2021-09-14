@@ -33,9 +33,9 @@ class PictureFragment : Fragment() {
 
     private fun randomClickListener() {
         binding.randomButton.setOnClickListener() {
-            val randomImage = Random().nextInt(viewModel.getPictureList().size)
+            val randomImage = Random().nextInt(viewModel.listOfPicture.size)
             Picasso.get()
-                .load(viewModel.getPictureList()[randomImage])
+                .load(viewModel.listOfPicture[randomImage])
                 .fit()
                 .into(binding.imgPicture)
         }
