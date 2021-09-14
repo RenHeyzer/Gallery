@@ -5,47 +5,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.gallery.R
 import com.example.gallery.databinding.FragmentGalleryBinding
 import com.example.gallery.interfaces.OnItemClickListener
 import com.example.gallery.ui.adapter.GalleryAdapter
+import com.example.gallery.utils.getTextEt
+import com.example.gallery.utils.isEmptyEt
 
-class GalleryFragment : Fragment() {
-    lateinit var binding: FragmentGalleryBinding
+class GalleryFragment : Fragment(R.layout.fragment_gallery) {
+    private val binding by viewBinding(FragmentGalleryBinding::bind)
     private val galleryAdapter: GalleryAdapter = GalleryAdapter()
-    private val viewModel: GalleryViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentGalleryBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
+    private val viewModel: GalleryViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setPictureList()
         setupRecycler()
+        setupListener()
         setupRequests()
+    }
+
+    private fun setupListener() {
+        setupOnItemClick()
         addPictureUrlClickListener()
     }
 
-    private fun setPictureList() {
-        viewModel.getPictureList()
-    }
-
-
-    private fun setupRecycler() {
-        binding.picturesRecycler.apply {
-            layoutManager =
-                GridLayoutManager(requireContext(), 3, GridLayoutManager.VERTICAL, false)
-            adapter = galleryAdapter
-        }
-
+    private fun setupOnItemClick() {
         galleryAdapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(url: String) {
                 val action = GalleryFragmentDirections.actionGalleryFragmentToPictureFragment(url)
@@ -54,18 +44,28 @@ class GalleryFragment : Fragment() {
         })
     }
 
+    private fun setPictureList() {
+        viewModel.getPictureList()
+    }
+
+    private fun setupRecycler() {
+        binding.picturesRecycler.apply {
+            layoutManager =
+                GridLayoutManager(requireContext(), 3, GridLayoutManager.VERTICAL, false)
+            adapter = galleryAdapter
+        }
+    }
+
     private fun setupRequests() {
-        viewModel.liveData.observe(viewLifecycleOwner, {
+        viewModel.liveData.observeForever {
             galleryAdapter.addList(it)
-        })
+        }
     }
 
     private fun addPictureUrlClickListener() {
         binding.btnAddPictures.setOnClickListener() {
-            val getUrl = binding.etAddPictures.text.toString()
-            if (getUrl.trim().isEmpty()) {
-                binding.etAddPictures.error = getString(R.string.url_error)
-            } else {
+            val getUrl = binding.etAddPictures.getTextEt()
+            if (binding.etAddPictures.isEmptyEt()) {
                 viewModel.setImage(getUrl)
                 binding.etAddPictures.setText("")
             }

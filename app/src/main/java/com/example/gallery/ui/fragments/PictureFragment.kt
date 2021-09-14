@@ -5,24 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.gallery.R
+import com.example.gallery.databinding.FragmentGalleryBinding
 import com.example.gallery.databinding.FragmentPictureBinding
+import com.example.gallery.utils.loadFitImage
+import com.example.gallery.utils.loadImage
 import com.squareup.picasso.Picasso
 import java.util.*
 
-class PictureFragment : Fragment() {
-    lateinit var binding: FragmentPictureBinding
+class PictureFragment : Fragment(R.layout.fragment_picture) {
+    private val binding by viewBinding(FragmentPictureBinding::bind)
     private val args: PictureFragmentArgs by navArgs()
-    private val viewModel: GalleryViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentPictureBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
+    private val viewModel: GalleryViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,18 +31,11 @@ class PictureFragment : Fragment() {
 
     private fun randomClickListener() {
         binding.randomButton.setOnClickListener() {
-            val randomImage = Random().nextInt(viewModel.listOfPicture.size)
-            Picasso.get()
-                .load(viewModel.listOfPicture[randomImage])
-                .fit()
-                .into(binding.imgPicture)
+            binding.imgPicture.loadFitImage(viewModel.randomAddImage())
         }
     }
 
     private fun getImageUrl() {
-        Picasso.get()
-            .load(args.image)
-            .fit()
-            .into(binding.imgPicture)
+       binding.imgPicture.loadFitImage(args.image)
     }
 }

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gallery.databinding.ItemPictureBinding
 import com.example.gallery.interfaces.OnItemClickListener
+import com.example.gallery.utils.loadImage
 import com.squareup.picasso.Picasso
 
 class GalleryAdapter : RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>() {
@@ -24,11 +25,7 @@ class GalleryAdapter : RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>() 
         private val binding: ItemPictureBinding, private var listener: OnItemClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(picture: String) {
-            Picasso.get().load(picture)
-                .resize(325, 400)
-                .into(binding.itemPicture)
-
-
+            binding.itemPicture.loadImage(picture)
         }
 
         init {

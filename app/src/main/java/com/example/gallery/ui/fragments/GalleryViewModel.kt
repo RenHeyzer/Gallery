@@ -1,21 +1,22 @@
 package com.example.gallery.ui.fragments
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.gallery.R
+import androidx.lifecycle.ViewModel
+import java.util.*
+import kotlin.collections.ArrayList
 
-class GalleryViewModel(application: Application) : AndroidViewModel(application) {
+class GalleryViewModel : ViewModel() {
+
     val liveData: MutableLiveData<List<String>> = MutableLiveData()
     var listOfPicture: ArrayList<String> = ArrayList()
 
     fun getPictureList() {
         listOfPicture = arrayListOf(
-            (getApplication<Application>().resources.getString(R.string.picture1)),
-            (getApplication<Application>().resources.getString(R.string.picture2)),
-            (getApplication<Application>().resources.getString(R.string.picture3)),
-            (getApplication<Application>().resources.getString(R.string.picture4)),
-            (getApplication<Application>().resources.getString(R.string.picture5))
+            "https://p4.wallpaperbetter.com/wallpaper/116/880/876/anime-anime-girls-marumoru-vertical-simple-background-hd-wallpaper-preview.jpg",
+            "https://p4.wallpaperbetter.com/wallpaper/523/98/463/digital-art-anime-anime-girls-yae-sakura-portrait-display-hd-wallpaper-preview.jpg",
+            "https://p4.wallpaperbetter.com/wallpaper/227/583/604/anime-anime-girls-digital-art-artwork-2d-hd-wallpaper-preview.jpg",
+            "https://p4.wallpaperbetter.com/wallpaper/123/200/904/portrait-display-vertical-landscape-wallpaper-preview.jpg",
+            "https://p4.wallpaperbetter.com/wallpaper/367/257/149/anime-anime-girls-digital-art-artwork-2d-hd-wallpaper-preview.jpg"
         )
         liveData.value = listOfPicture
     }
@@ -24,4 +25,6 @@ class GalleryViewModel(application: Application) : AndroidViewModel(application)
         listOfPicture.add(url)
         liveData.value = listOfPicture
     }
+
+    fun randomAddImage() = listOfPicture[Random().nextInt(listOfPicture.size)]
 }
