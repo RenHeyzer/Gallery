@@ -1,0 +1,12 @@
+<resources>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Gallery</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="picture1">https://p4.wallpaperbetter.com/wallpaper/116/880/876/anime-anime-girls-marumoru-vertical-simple-background-hd-wallpaper-preview.jpg</string>
+    <string name="picture2">https://p4.wallpaperbetter.com/wallpaper/523/98/463/digital-art-anime-anime-girls-yae-sakura-portrait-display-hd-wallpaper-preview.jpg</string>
+    <string name="picture3">https://p4.wallpaperbetter.com/wallpaper/227/583/604/anime-anime-girls-digital-art-artwork-2d-hd-wallpaper-preview.jpg</string>
+    <string name="picture4">https://p4.wallpaperbetter.com/wallpaper/123/200/904/portrait-display-vertical-landscape-wallpaper-preview.jpg</string>
+    <string name="picture5">https://p4.wallpaperbetter.com/wallpaper/367/257/149/anime-anime-girls-digital-art-artwork-2d-hd-wallpaper-preview.jpg</string>
+    <string name="g">kgkjkggk</string>
+    <string name="url_error">Вставьте Url картинки!</string>
+</resources>
