@@ -1,21 +1,14 @@
 package com.example.gallery.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.gallery.R
-import com.example.gallery.databinding.FragmentGalleryBinding
 import com.example.gallery.databinding.FragmentPictureBinding
 import com.example.gallery.utils.loadFitImage
-import com.example.gallery.utils.loadImage
-import com.squareup.picasso.Picasso
-import java.util.*
 
 class PictureFragment : Fragment(R.layout.fragment_picture) {
     private val binding by viewBinding(FragmentPictureBinding::bind)
@@ -36,6 +29,6 @@ class PictureFragment : Fragment(R.layout.fragment_picture) {
     }
 
     private fun getImageUrl() {
-       binding.imgPicture.loadFitImage(args.image)
+        binding.imgPicture.loadFitImage(args.image)
     }
 }

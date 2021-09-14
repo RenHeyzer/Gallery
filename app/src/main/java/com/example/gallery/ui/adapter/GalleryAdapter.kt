@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gallery.databinding.ItemPictureBinding
 import com.example.gallery.interfaces.OnItemClickListener
 import com.example.gallery.utils.loadImage
-import com.squareup.picasso.Picasso
 
 class GalleryAdapter : RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>() {
     private var listOfPicture: List<String> = arrayListOf()
